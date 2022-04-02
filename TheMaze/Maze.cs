@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Linq;
 
 namespace TheMaze;
 
@@ -6,7 +7,7 @@ public class Cell
 {
     public int X;
     public int Y;
-    public HashSet<Cell> Neighbors;
+    public List<Cell> Neighbors;
     public bool IsVisited;
     public int Hash;
     public TypeOfSpace Value;
@@ -18,16 +19,9 @@ public class Cell
         Value = value;
         IsVisited = false;
         Hash = GetHashCode();
+        Neighbors = new List<Cell>();
     }
 
-
-    public bool CheckCell(int x, int y, int cols, int rows)
-    {
-        {
-            if (0 < x && x < cols && x % 2 == 1 && 0 < y && y < rows && y % 2 == 1 && !IsVisited) return true;
-            return false;
-        }
-    }
 
     public sealed override int GetHashCode()
     {
@@ -40,42 +34,102 @@ public class Cell
     }
 }
 
-public class Field 
+public class Field
 {
-    private int rows;
-    private int cols;
-    private Cell[,] Map;
+    private int _rows;
+    private int _cols;
+    public Cell[,] Map;
     public HashSet<Cell> WallsSet;
+    private int _freeCellsCounter;
 
 
     public Field(int rows, int cols)
     {
-        rows = rows * 2 + 1;
-        cols = cols * 2 + 1;
-        Map = new Cell[cols, rows];
+        _freeCellsCounter = cols * rows;
+        _rows = rows * 2 + 1;
+        _cols = cols * 2 + 1;
+        Map = new Cell[_cols, _rows];
         WallsSet = new HashSet<Cell>();
-        
+        GenerateMaze();
     }
+
+    public Cell GetNeibours(Cell cell)
+    {
+        var i = cell.X;
+        var j = cell.Y;
+        if (CheckCell(i + 2, j)) cell.Neighbors.Add(Map[i + 2, j]);
+        if (CheckCell(i, j + 2)) cell.Neighbors.Add(Map[i, j + 2]);
+        if (CheckCell(i - 2, j)) cell.Neighbors.Add(Map[i - 2, j]);
+        if (CheckCell(i, j - 2)) cell.Neighbors.Add(Map[i, j - 2]);
+
+        if (Map[i, j].Neighbors.Count != 0)
+            return cell.Neighbors[new Random().Next(Map[i, j].Neighbors.Count)];
+        return null;
+    }
+
+    public void GetWallSet()
+    {
+        WallsSet = new HashSet<Cell>();
+        foreach (var cell in Map)
+        {
+            if (cell.Value == TypeOfSpace.Wall) WallsSet.Add(cell);
+        }
+    }
+
+    public bool CheckCell(int x, int y)
+    {
+        {
+            if (0 < x && x < _cols && x % 2 == 1 &&
+                0 < y && y < _rows && y % 2 == 1 &&
+                !Map[x, y].IsVisited) return true;
+            return false;
+        }
+    }
+
 
     public void GenerateMaze()
     {
-        for (int i = 0; i < rows; i++)
+        // генерация базоваой сетки
+
+        for (int i = 0; i < _rows; i++)
         {
-            for (int j = 0; j < cols; j++)
+            for (int j = 0; j < _cols; j++)
             {
-                if (i == 0 || i == rows - 1)
+                if (i == 0 || i == _rows - 1)
                 {
                     Map[i, j] = new Cell(i, j, TypeOfSpace.Wall);
-                    WallsSet.Add(Map[i,j]);
                 }
+
                 if (j % 2 == 0 || i % 2 == 0)
                 {
                     Map[i, j] = new Cell(i, j, TypeOfSpace.Wall);
-                    WallsSet.Add(Map[i, j]);
                 }
                 else Map[i, j] = new Cell(i, j, TypeOfSpace.Empty);
             }
         }
+
+        
+        
+
+        GetWallSet();
+    }
+
+    public void Backtrack(ref Cell currentCell, ref Stack<Cell> wayStack)
+    {
+        
+        // recursive backtrack
+        currentCell.IsVisited = true;
+        var nextCell = GetNeibours(currentCell);
+        if (nextCell != null)
+        {
+            nextCell.IsVisited = true;
+            wayStack.Push(nextCell);
+            var breackedWall = Map[(currentCell.X + nextCell.X) / 2, (currentCell.Y + nextCell.Y) / 2];
+            breackedWall.Value = TypeOfSpace.Empty;
+            currentCell = nextCell;
+            _freeCellsCounter--;
+        }
+        else if (wayStack.Count != 0) currentCell = wayStack.Pop();
+        GetWallSet();
     }
 }
-
