@@ -21,8 +21,11 @@ public partial class Form1 : Form
         wayStack.Push(currentCell);
         timer.Tick += (sender, args) =>
         {
-            _maze.Backtrack(ref currentCell, ref wayStack);
-            Invalidate();
+            if (_maze.FreeCellsCounter !=0)
+            {
+                _maze.Backtrack(ref currentCell, ref wayStack);
+                Invalidate();
+            }
         };
         timer.Start();
     }

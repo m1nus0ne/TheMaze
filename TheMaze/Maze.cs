@@ -7,7 +7,6 @@ public class Cell
 {
     public int X;
     public int Y;
-    public List<Cell> Neighbors;
     public bool IsVisited;
     public int Hash;
     public TypeOfSpace Value;
@@ -19,7 +18,7 @@ public class Cell
         Value = value;
         IsVisited = false;
         Hash = GetHashCode();
-        Neighbors = new List<Cell>();
+        
     }
 
 
@@ -40,12 +39,12 @@ public class Field
     private int _cols;
     public Cell[,] Map;
     public HashSet<Cell> WallsSet;
-    private int _freeCellsCounter;
+    public int FreeCellsCounter;
 
 
     public Field(int rows, int cols)
     {
-        _freeCellsCounter = cols * rows;
+        FreeCellsCounter = cols * rows;
         _rows = rows * 2 + 1;
         _cols = cols * 2 + 1;
         Map = new Cell[_cols, _rows];
@@ -53,17 +52,18 @@ public class Field
         GenerateMaze();
     }
 
-    public Cell GetNeibours(Cell cell)
+    public Cell GetNeighbours(Cell cell)
     {
+        var Neighbours = new List<Cell>();
         var i = cell.X;
         var j = cell.Y;
-        if (CheckCell(i + 2, j)) cell.Neighbors.Add(Map[i + 2, j]);
-        if (CheckCell(i, j + 2)) cell.Neighbors.Add(Map[i, j + 2]);
-        if (CheckCell(i - 2, j)) cell.Neighbors.Add(Map[i - 2, j]);
-        if (CheckCell(i, j - 2)) cell.Neighbors.Add(Map[i, j - 2]);
+        if (CheckCell(i + 2, j)) Neighbours.Add(Map[i + 2, j]);
+        if (CheckCell(i, j + 2)) Neighbours.Add(Map[i, j + 2]);
+        if (CheckCell(i - 2, j)) Neighbours.Add(Map[i - 2, j]);
+        if (CheckCell(i, j - 2)) Neighbours.Add(Map[i, j - 2]);
 
-        if (Map[i, j].Neighbors.Count != 0)
-            return cell.Neighbors[new Random().Next(Map[i, j].Neighbors.Count)];
+        if (Neighbours.Count != 0)
+            return Neighbours[new Random().Next(Neighbours.Count)];
         return null;
     }
 
@@ -119,7 +119,7 @@ public class Field
         
         // recursive backtrack
         currentCell.IsVisited = true;
-        var nextCell = GetNeibours(currentCell);
+        var nextCell = GetNeighbours(currentCell);
         if (nextCell != null)
         {
             nextCell.IsVisited = true;
@@ -127,7 +127,7 @@ public class Field
             var breackedWall = Map[(currentCell.X + nextCell.X) / 2, (currentCell.Y + nextCell.Y) / 2];
             breackedWall.Value = TypeOfSpace.Empty;
             currentCell = nextCell;
-            _freeCellsCounter--;
+            FreeCellsCounter--;
         }
         else if (wayStack.Count != 0) currentCell = wayStack.Pop();
         GetWallSet();
