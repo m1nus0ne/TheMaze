@@ -44,7 +44,7 @@ public class Field
 
     public Field(int rows, int cols)
     {
-        FreeCellsCounter = cols * rows;
+        FreeCellsCounter = cols * rows-1;
         _rows = rows * 2 + 1;
         _cols = cols * 2 + 1;
         Map = new Cell[_cols, _rows];
@@ -108,9 +108,14 @@ public class Field
             }
         }
 
-        
-        
 
+
+        // var wayStack = new Stack<Cell>();
+        // var currentCell = Map[1, 1];
+        // while (FreeCellsCounter!=0)
+        // {
+        //     Backtrack(ref currentCell,ref wayStack);
+        // }
         GetWallSet();
     }
 
@@ -130,6 +135,8 @@ public class Field
             FreeCellsCounter--;
         }
         else if (wayStack.Count != 0) currentCell = wayStack.Pop();
-        GetWallSet();
+        if (FreeCellsCounter == 0) GetWallSet();
+        
+        
     }
 }
