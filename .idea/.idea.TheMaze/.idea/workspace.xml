@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29693a07-433f-408a-b846-9045e5d8c4d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TheMaze/Raycasting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Form1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Maze.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Maze.cs" afterDir="false" />
@@ -21,6 +23,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f14b2b38e41a86c6f3f927d5b5586e45cac2b8789c4c170faa6891a27ecf1d4/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -79,7 +84,14 @@
       <workItem from="1648792137761" duration="3410000" />
       <workItem from="1648838554832" duration="11954000" />
       <workItem from="1648989909022" duration="2563000" />
-      <workItem from="1648999365623" duration="623000" />
+      <workItem from="1648999365623" duration="1184000" />
+      <workItem from="1649007109684" duration="339000" />
+      <workItem from="1649167087779" duration="1272000" />
+      <workItem from="1649301008709" duration="5229000" />
+      <workItem from="1649348084397" duration="55000" />
+      <workItem from="1649465141374" duration="1180000" />
+      <workItem from="1649599973497" duration="81000" />
+      <workItem from="1649632421599" duration="2864000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1648661629654</created>
@@ -102,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648907567766</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="maze gen completed">
+      <created>1649000165589</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1649000165589</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,7 +145,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="init" />
     <MESSAGE value="hotfix" />
-    <option name="LAST_COMMIT_MESSAGE" value="hotfix" />
+    <MESSAGE value="maze gen completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="maze gen completed" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
