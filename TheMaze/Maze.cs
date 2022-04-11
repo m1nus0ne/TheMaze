@@ -110,13 +110,13 @@ public class Field
 
 
 
-        // var wayStack = new Stack<Cell>();
-        // var currentCell = Map[1, 1];
-        // while (FreeCellsCounter!=0)
-        // {
-        //     Backtrack(ref currentCell,ref wayStack);
-        // }
-        GetWallSet();
+        var wayStack = new Stack<Cell>();
+        var currentCell = Map[1, 1];
+        while (FreeCellsCounter!=0)
+        {
+            Backtrack(ref currentCell,ref wayStack);
+        }
+        
     }
 
     public void Backtrack(ref Cell currentCell, ref Stack<Cell> wayStack)
@@ -135,8 +135,8 @@ public class Field
             FreeCellsCounter--;
         }
         else if (wayStack.Count != 0) currentCell = wayStack.Pop();
+
         if (FreeCellsCounter == 0) GetWallSet();
-        
-        
+
     }
 }
