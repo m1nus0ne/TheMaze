@@ -10,6 +10,7 @@ public class Cell
     public bool IsVisited;
     public int Hash;
     public TypeOfSpace Value;
+    public bool IsVisible;
 
     public Cell(int x, int y, TypeOfSpace value)
     {
@@ -18,7 +19,7 @@ public class Cell
         Value = value;
         IsVisited = false;
         Hash = GetHashCode();
-        
+        if (value == TypeOfSpace.Wall) IsVisible = false;
     }
 
 
@@ -44,7 +45,7 @@ public class Field
 
     public Field(int rows, int cols)
     {
-        FreeCellsCounter = cols * rows-1;
+        FreeCellsCounter = cols * rows - 1;
         _rows = rows * 2 + 1;
         _cols = cols * 2 + 1;
         Map = new Cell[_cols, _rows];
@@ -109,19 +110,19 @@ public class Field
         }
 
 
-
         var wayStack = new Stack<Cell>();
         var currentCell = Map[1, 1];
-        while (FreeCellsCounter!=0)
+        var origFreeCellsCounter = FreeCellsCounter;
+        while (FreeCellsCounter != 0)
         {
-            Backtrack(ref currentCell,ref wayStack);
+            Backtrack(ref currentCell, ref wayStack);
         }
-        
+
+        FreeCellsCounter = origFreeCellsCounter;
     }
 
     public void Backtrack(ref Cell currentCell, ref Stack<Cell> wayStack)
     {
-        
         // recursive backtrack
         currentCell.IsVisited = true;
         var nextCell = GetNeighbours(currentCell);
@@ -137,6 +138,17 @@ public class Field
         else if (wayStack.Count != 0) currentCell = wayStack.Pop();
 
         if (FreeCellsCounter == 0) GetWallSet();
+    }
 
+    public void GetVision(int x, int y, int distance)
+    {
+        for (int i = x - distance; i <= x + distance; i++)
+        {
+            for (int j = y - distance; i <= y + distance; i++)
+            {
+                if (CheckCell(i, j) && Map[i, j].Value == TypeOfSpace.Wall)
+                    Map[i, j].IsVisible = true;
+            }
+        }
     }
 }

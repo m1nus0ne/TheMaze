@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29693a07-433f-408a-b846-9045e5d8c4d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TheMaze/Raycasting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Form1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Maze.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Maze.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheMaze/Raycasting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Raycasting.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +25,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f14b2b38e41a86c6f3f927d5b5586e45cac2b8789c4c170faa6891a27ecf1d4/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f857b4a4ba923116a566346f88433337e738b56c8de580dc7330b6f1fef1/Application.ComponentManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -92,6 +92,7 @@
       <workItem from="1649465141374" duration="1180000" />
       <workItem from="1649599973497" duration="81000" />
       <workItem from="1649632421599" duration="2864000" />
+      <workItem from="1649973763203" duration="1215000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1648661629654</created>
@@ -149,6 +150,23 @@
     <option name="LAST_COMMIT_MESSAGE" value="maze gen completed" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TheMaze/Form1.cs</url>
+          <line>39</line>
+          <properties documentPath="D:\!IT\C SHARP\TheMaze\TheMaze\TheMaze\Form1.cs" initialLine="41" containingFunctionPresentation="method 'OnKeyPress'">
+            <startOffsets>
+              <option value="999" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1034" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="DotNetProject">
         <watch expression="currentCell" />
