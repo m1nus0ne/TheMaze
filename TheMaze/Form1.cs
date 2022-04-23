@@ -6,53 +6,90 @@ namespace TheMaze;
 
 public partial class Form1 : Form
 {
-    private Field _maze;
-    private float _tile;
-    private Player _player;
-
+    private Raycasting Handler;
+    
 
     public Form1()
     {
+        // FormBorderStyle = FormBorderStyle.None;
+        Handler = new Raycasting();
+        Handler.TileSize = 20f;
+        Handler.MaxDepth = 1000;
+        Handler.RaysCounter = 800;
+        Handler.FOV = 1;
+        Handler.WinWidth = 1920;
+        Handler.WinHeight = 1080;
+        
+        Handler.Maze = new Field(10, 10);
+        Handler.Player = new Player(new Vector2(Handler.TileSize * 1.5f, Handler.TileSize * 1.5f), 0);
+        
         InitializeComponent();
-        _maze = new Field(10, 10);
-        _tile = 20;
-        _maze.GenerateMaze();
-        _player = new Player(new Vector2(_tile * 1.5f, _tile * 1.5f), 0);
     }
 
     protected override void OnPaint(PaintEventArgs e)
     {
+        Size = new Size(1600, 1080);
         DoubleBuffered = true;
         var g = e.Graphics;
-        foreach (var w in _maze.WallsSet)
-        {
-            g.FillRectangle(new SolidBrush(Color.Black), w.X * _tile, w.Y * _tile, _tile, _tile);
-        }
+        
+        
+        g.FillRectangle(new SolidBrush(Color.Blue),0,0,Handler.WinWidth,Handler.WinHeight/2);
+        g.FillRectangle(new SolidBrush(Color.Green),0,Handler.WinHeight/2,Handler.WinWidth,Handler.WinHeight);
+        var pen = new Pen(Color.Red, 1);
 
-        g.FillEllipse(new SolidBrush(Color.Red), _player.Pos.X, _player.Pos.Y, _tile / 2, _tile / 2);
+        // g.DrawLine(pen,Handler.GetDirectionLine().Item1,Handler.GetDirectionLine().Item2);
+       
+        
+        foreach (var point in Handler.GetDirectionLines())
+        {
+            var a = Color.FromArgb(point.Item1, point.Item1, point.Item1);
+            
+            g.FillRectangle(new SolidBrush(a),point.Item2);
+        }
+        foreach (var w in Handler.Maze.WallsSet)
+        {
+            g.FillRectangle(new SolidBrush(Color.Black), w.X * Handler.TileSize, w.Y * Handler.TileSize,
+                Handler.TileSize, Handler.TileSize);
+        }
+        g.FillEllipse(new SolidBrush(Color.Red),Handler.Player.Pos.X-5,Handler.Player.Pos.Y-5,10,10);
     }
+    
 
     protected override void OnKeyPress(KeyPressEventArgs e)
     {
         if (e.KeyChar == 's')
         {
-            _player.Move(new Vector2(0f, 1f), 1f,_maze.WallsSet,_tile);
-            Invalidate();
+            Handler.Move(new Vector2(0f, -1f), 2f);
         }
+
         if (e.KeyChar == 'w')
         {
-            _player.Move(new Vector2(0f, -1f), 1f,_maze.WallsSet,_tile);
-            Invalidate();
+            Handler.Move(new Vector2(0f, 1f), 2f);
         }
+
         if (e.KeyChar == 'a')
         {
-            _player.Move(new Vector2(-1f, 0f), 1f,_maze.WallsSet,_tile);
-            Invalidate();
+            Handler.Move(new Vector2(1f, 0), 1f);
         }
+
         if (e.KeyChar == 'd')
         {
-            _player.Move(new Vector2(1f, 0), 1f,_maze.WallsSet,_tile);
-            Invalidate();
+            Handler.Move(new Vector2(-1f, 0f), 2f);
         }
+
+        if (e.KeyChar == 'e')
+        {
+            Handler.TurnLeft((float) (Math.PI/8));
+        }
+
+        if (e.KeyChar == 'q')
+        {
+            Handler.TurnRight((float) (Math.PI/8));
+        }
+        if (e.KeyChar == 'r')
+        {
+            Handler.Maze = new Field(10, 10);
+        }
+        Invalidate();
     }
 }
