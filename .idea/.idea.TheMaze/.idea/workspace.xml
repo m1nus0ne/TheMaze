@@ -4,15 +4,19 @@
     <projectFile>TheMaze/TheMaze.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29693a07-433f-408a-b846-9045e5d8c4d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheMaze/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Form1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheMaze/Raycasting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Raycasting.cs" afterDir="false" />
-    </list>
+    <list default="true" id="29693a07-433f-408a-b846-9045e5d8c4d2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="no_raycasting" />
+      </map>
+    </option>
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -23,8 +27,14 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://D:/!IT/C SHARP/TheMaze/TheMaze/TheMaze/Form1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/!IT/C SHARP/TheMaze/TheMaze/TheMaze/Form1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f14b2b38e41a86c6f3f927d5b5586e45cac2b8789c4c170faa6891a27ecf1d4/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f857b4a4ba923116a566346f88433337e738b56c8de580dc7330b6f1fef1/Application.ComponentManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/!IT/C SHARP/TheMaze/TheMaze/TheMaze/Raycasting.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/!IT/C SHARP/TheMaze/TheMaze/TheMaze/Form1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/!IT/C SHARP/TheMaze/TheMaze/TheMaze/Raycasting.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/!IT/C SHARP/TheMaze/TheMaze/TheMaze/Raycasting.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -133,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649000165589</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="0.7">
+      <created>1650718062659</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1650718062659</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,9 +175,40 @@
     <MESSAGE value="init" />
     <MESSAGE value="hotfix" />
     <MESSAGE value="maze gen completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="maze gen completed" />
+    <MESSAGE value="0.7" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.7" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TheMaze/Raycasting.cs</url>
+          <line>105</line>
+          <properties documentPath="D:\!IT\C SHARP\TheMaze\TheMaze\TheMaze\Raycasting.cs" initialLine="26" containingFunctionPresentation="method 'Move'">
+            <startOffsets>
+              <option value="479" />
+            </startOffsets>
+            <endOffsets>
+              <option value="486" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TheMaze/Form1.cs</url>
+          <line>74</line>
+          <properties documentPath="D:\!IT\C SHARP\TheMaze\TheMaze\TheMaze\Form1.cs" initialLine="51" containingFunctionPresentation="method 'OnKeyPress'">
+            <startOffsets>
+              <option value="1244" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1280" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="DotNetProject">
         <watch expression="currentCell" />
