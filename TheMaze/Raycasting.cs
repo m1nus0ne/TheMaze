@@ -39,8 +39,8 @@ public class Raycasting
     {
         DeltaAngle = FOV / RaysCounter;
         ScaleX = WinWidth / RaysCounter;
-        var dist = RaysCounter / (2 * Math.Tan(FOV / 2));
-        var projCoeff = dist * TileSize;
+        var dist = RaysCounter / (2 * Math.Tan(FOV / 2))/4;
+        var projCoeff = 3*dist * TileSize;
         
         var currentAngle = Player.Angle - FOV / 2;
         for (int ray = 0; ray < RaysCounter; ray++)
@@ -48,15 +48,16 @@ public class Raycasting
             // var sinA = Math.Sin(currentAngle);
             // var cosA = Math.Cos(currentAngle);
             var flag = true;
-            for (int depth = 0; depth < MaxDepth; depth++)
+            for (double depth = 0; depth < MaxDepth; depth++)
             {
-                var rayVector = Player.Pos + new Vector2(0, depth).RotateRadians(currentAngle);
+                var rayVector = Player.Pos + new Vector2(0, (float) depth).RotateRadians(currentAngle);
 
                 if (Maze.Map[(int) (rayVector.X / TileSize), (int) (rayVector.Y / TileSize)].Value == TypeOfSpace.Wall)
                 {
+                    depth *= Math.Cos(Player.Angle - currentAngle);
                     int c = (int) (255 / (1 + depth * depth * 0.0001));
                     var projY = projCoeff / depth;
-                    yield return new Tuple<int, Rectangle>(c,new Rectangle(ray * ScaleX, (int) (WinHeight / 2 - projY / 2), ScaleX, (int) projY));
+                    yield return new Tuple<int, Rectangle>(c,new Rectangle(ray * ScaleX, (int) (WinHeight / 2 - projY/2 ), ScaleX, (int) projY));
                     flag = false;
                     break;
                 }

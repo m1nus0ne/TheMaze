@@ -13,12 +13,12 @@ public partial class Form1 : Form
     {
         // FormBorderStyle = FormBorderStyle.None;
         Handler = new Raycasting();
-        Handler.TileSize = 20f;
-        Handler.MaxDepth = 1000;
-        Handler.RaysCounter = 800;
-        Handler.FOV = 1;
-        Handler.WinWidth = 1920;
-        Handler.WinHeight = 1080;
+        Handler.TileSize = 100f;
+        Handler.MaxDepth = 800;
+        Handler.RaysCounter = 1200;
+        Handler.FOV = (float) (Math.PI/3);
+        Handler.WinWidth = 1200;
+        Handler.WinHeight = 800;
         
         Handler.Maze = new Field(10, 10);
         Handler.Player = new Player(new Vector2(Handler.TileSize * 1.5f, Handler.TileSize * 1.5f), 0);
@@ -28,7 +28,7 @@ public partial class Form1 : Form
 
     protected override void OnPaint(PaintEventArgs e)
     {
-        Size = new Size(1600, 1080);
+        Size = new Size(1200, 800);
         DoubleBuffered = true;
         var g = e.Graphics;
         
@@ -46,47 +46,48 @@ public partial class Form1 : Form
             
             g.FillRectangle(new SolidBrush(a),point.Item2);
         }
-        foreach (var w in Handler.Maze.WallsSet)
-        {
-            g.FillRectangle(new SolidBrush(Color.Black), w.X * Handler.TileSize, w.Y * Handler.TileSize,
-                Handler.TileSize, Handler.TileSize);
-        }
-        g.FillEllipse(new SolidBrush(Color.Red),Handler.Player.Pos.X-5,Handler.Player.Pos.Y-5,10,10);
+        // foreach (var w in Handler.Maze.WallsSet)
+        // {
+        //     g.FillRectangle(new SolidBrush(Color.Black), w.X * Handler.TileSize, w.Y * Handler.TileSize,
+        //         Handler.TileSize, Handler.TileSize);
+        // }
+        // g.FillEllipse(new SolidBrush(Color.Red),Handler.Player.Pos.X-5,Handler.Player.Pos.Y-5,10,10);
     }
+
     
 
-    protected override void OnKeyPress(KeyPressEventArgs e)
+    protected override void OnKeyDown(KeyEventArgs e)
     {
-        if (e.KeyChar == 's')
+        if (e.KeyValue == (int)Keys.S)
         {
             Handler.Move(new Vector2(0f, -1f), 2f);
         }
 
-        if (e.KeyChar == 'w')
+        if (e.KeyValue == (int)Keys.W)
         {
             Handler.Move(new Vector2(0f, 1f), 2f);
         }
 
-        if (e.KeyChar == 'a')
+        if (e.KeyValue == (int)Keys.A)
         {
             Handler.Move(new Vector2(1f, 0), 1f);
         }
 
-        if (e.KeyChar == 'd')
+        if (e.KeyValue == (int)Keys.D)
         {
             Handler.Move(new Vector2(-1f, 0f), 2f);
         }
 
-        if (e.KeyChar == 'e')
+        if (e.KeyValue == (int)Keys.E)
         {
             Handler.TurnLeft((float) (Math.PI/8));
         }
 
-        if (e.KeyChar == 'q')
+        if (e.KeyValue == (int)Keys.Q)
         {
             Handler.TurnRight((float) (Math.PI/8));
         }
-        if (e.KeyChar == 'r')
+        if (e.KeyValue == (int)Keys.R)
         {
             Handler.Maze = new Field(10, 10);
         }
