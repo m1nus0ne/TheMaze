@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29693a07-433f-408a-b846-9045e5d8c4d2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Form1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Raycasting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Raycasting.cs" afterDir="false" />
@@ -16,6 +18,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -109,7 +112,8 @@
       <workItem from="1650713664609" duration="1789000" />
       <workItem from="1650716512396" duration="1029000" />
       <workItem from="1651453017418" duration="2320000" />
-      <workItem from="1651468770933" duration="399000" />
+      <workItem from="1651468770933" duration="1600000" />
+      <workItem from="1651573659080" duration="921000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1648661629654</created>
@@ -139,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649000165589</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="1.0">
+      <created>1651469298655</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1651469298655</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +175,8 @@
     <MESSAGE value="init" />
     <MESSAGE value="hotfix" />
     <MESSAGE value="maze gen completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="maze gen completed" />
+    <MESSAGE value="1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.0" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

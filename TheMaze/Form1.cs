@@ -14,7 +14,7 @@ public partial class Form1 : Form
         // FormBorderStyle = FormBorderStyle.None;
         Handler = new Raycasting();
         Handler.TileSize = 100f;
-        Handler.MaxDepth = 800;
+        Handler.MaxDepth = 1000;
         Handler.RaysCounter = 1200;
         Handler.FOV = (float) (Math.PI/3);
         Handler.WinWidth = 1200;
@@ -46,6 +46,10 @@ public partial class Form1 : Form
             
             g.FillRectangle(new SolidBrush(a),point.Item2);
         }
+        // foreach (var point in Handler.lines())
+        // {
+        //     g.DrawLine(new Pen(Color.Black,3),point.Item1,point.Item2);
+        // }
         // foreach (var w in Handler.Maze.WallsSet)
         // {
         //     g.FillRectangle(new SolidBrush(Color.Black), w.X * Handler.TileSize, w.Y * Handler.TileSize,
@@ -58,24 +62,25 @@ public partial class Form1 : Form
 
     protected override void OnKeyDown(KeyEventArgs e)
     {
+        var v = new Vector2(0, 0);
         if (e.KeyValue == (int)Keys.S)
         {
-            Handler.Move(new Vector2(0f, -1f), 2f);
+            v += new Vector2(0f, -1f);
         }
 
         if (e.KeyValue == (int)Keys.W)
         {
-            Handler.Move(new Vector2(0f, 1f), 2f);
+            v += new Vector2(0f, 1f);
         }
 
         if (e.KeyValue == (int)Keys.A)
         {
-            Handler.Move(new Vector2(1f, 0), 1f);
+            v += new Vector2(1f, 0f);
         }
 
         if (e.KeyValue == (int)Keys.D)
         {
-            Handler.Move(new Vector2(-1f, 0f), 2f);
+            v += new Vector2(-1f, 0f);
         }
 
         if (e.KeyValue == (int)Keys.E)
@@ -91,6 +96,7 @@ public partial class Form1 : Form
         {
             Handler.Maze = new Field(10, 10);
         }
+        Handler.Move(v,2f);
         Invalidate();
     }
 }

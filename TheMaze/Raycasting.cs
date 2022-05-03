@@ -57,7 +57,8 @@ public class Raycasting
                     depth *= Math.Cos(Player.Angle - currentAngle);
                     int c = (int) (255 / (1 + depth * depth * 0.0001));
                     var projY = projCoeff / depth;
-                    yield return new Tuple<int, Rectangle>(c,new Rectangle(ray * ScaleX, (int) (WinHeight / 2 - projY/2 ), ScaleX, (int) projY));
+                    yield return new Tuple<int, Rectangle>(c,
+                        new Rectangle(ray * ScaleX, (int) (WinHeight / 2 - projY/2 ), ScaleX, (int) projY));
                     flag = false;
                     break;
                 }
@@ -80,6 +81,57 @@ public class Raycasting
         var v = new Vector2(0, -TileSize / 4).RotateRadians(Player.Angle);
         var point2 = new Point(point1.X + (int) v.X, (int) (point1.Y + v.Y));
         return Tuple.Create(point1, point2);
+    }
+    public IEnumerable<Tuple<Point,Point>> lines()
+    {
+        var a = new Point();
+        var b = new Point();
+        DeltaAngle = FOV / RaysCounter;
+        ScaleX = WinWidth / RaysCounter;
+        var dist = RaysCounter / (2 * Math.Tan(FOV / 2))/4;
+        var projCoeff = 3*dist * TileSize;
+        
+        var currentAngle = Player.Angle - FOV / 2;
+        for (int ray = 0; ray < RaysCounter; ray++)
+        {
+            // var sinA = Math.Sin(currentAngle);
+            // var cosA = Math.Cos(currentAngle);
+            var flag = true;
+            for (double depth = 0; depth < MaxDepth; depth++)
+            {
+                var rayVector = Player.Pos + new Vector2(0, (float) depth).RotateRadians(currentAngle);
+
+                if (Maze.Map[(int) (rayVector.X / TileSize), (int) (rayVector.Y / TileSize)].Value == TypeOfSpace.Wall && flag)
+                {
+                    depth *= Math.Cos(Player.Angle - currentAngle);
+                    int c = (int) (255 / (1 + depth * depth * 0.0001));
+                    var projY = projCoeff / depth;
+                    a = new Point(ray * ScaleX, (int) (WinHeight / 2 + projY / 2));
+                    flag = false;
+                    
+                }
+
+                if (Maze.Map[(int) (rayVector.X / TileSize), (int) (rayVector.Y / TileSize)].Value ==
+                    TypeOfSpace.Wall && !flag)
+                {
+                    depth *= Math.Cos(Player.Angle - currentAngle);
+                    int c = (int) (255 / (1 + depth * depth * 0.0001));
+                    var projY = projCoeff / depth;
+                    b = new Point(ray * ScaleX, (int) (WinHeight / 2 + projY / 2));
+                    flag = true;
+                    yield return Tuple.Create<Point, Point>(a,b);
+                }
+            }
+
+            // if (flag)
+            // {
+            //     var rayVector = Player.Pos + new Vector2(0, MaxDepth).RotateRadians(currentAngle);
+            //
+            //     yield return new Point((int) rayVector.X, (int) rayVector.Y);
+            // }
+
+            currentAngle += DeltaAngle;
+        }
     }
 }
 
