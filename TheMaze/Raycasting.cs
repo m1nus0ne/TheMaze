@@ -1,136 +1,216 @@
 using System.Numerics;
-using System;
+using static TheMaze.CFG;
 
 namespace TheMaze;
 
 public class Raycasting
 {
-    public int ScaleX;
     public Field Maze;
     public Player Player;
-    public float TileSize;
-    public int WinWidth;
-    public int WinHeight;
-    public float FOV;
-    public int RaysCounter;
-    public int MaxDepth;
-    public float DeltaAngle;
 
 
-    public void MazeGen() => Maze.GenerateMaze();
+    public int ScaleX;
+    private float _deltaAngle;
+    public HashSet<(int, int)> WallSet;
+    public HashSet<(int, int)> WallMinimapSet;
+
+    public Raycasting()
+    {
+        _deltaAngle = FOV / RaysCounter;
+        ScaleX = WindowWidth / RaysCounter;
+        Maze = new Field(10, 10);
+        Player = new Player(new Vector2(TileSize * 1.5f, TileSize * 1.5f), (float) (Math.PI / 2));
+        WallSetsInitialize();
+    }
+
+
+    public void MazeGen()
+    {
+        Maze.GenerateMaze();
+        WallSetsInitialize();
+    }
+
     public void TurnLeft(float delta) => Player.Angle += delta;
     public void TurnRight(float delta) => Player.Angle -= delta;
 
+    private void WallSetsInitialize()
+    {
+        WallSet = new HashSet<(int, int)>();
+        WallMinimapSet = new HashSet<(int, int)>();
+        foreach (var cell in Maze.Map)
+        {
+            if (cell.Value == TypeOfSpace.Wall)
+            {
+                WallSet.Add((cell.X * TileSize, cell.Y * TileSize));
+                WallMinimapSet.Add((cell.X * MapTileSize, cell.Y * MapTileSize));
+            }
+        }
+    }
+
     public void Move(Vector2 direction, float delta)
     {
-        var possiblePos = Player.Pos + direction.RotateRadians(Player.Angle) * delta;
-        if (Maze.Map[(int) (Math.Floor(possiblePos.X) / TileSize),
-                (int) (Math.Floor(possiblePos.Y) / TileSize)].Value == TypeOfSpace.Wall) return;
-        Player.Pos += direction.RotateRadians(Player.Angle) * delta * 2;
+        for (int i = -1; i < 2; i++)
+        {
+            for (int j = -1; j < 2; j++)
+            {
+                var possiblePos = Player.Pos + direction.RotateRadians(Player.Angle) * delta +
+                                  new Vector2(i * 5, j * 5);
+                if (Maze.Map[(int) (Math.Floor(possiblePos.X) / TileSize),
+                        (int) (Math.Floor(possiblePos.Y) / TileSize)].Value == TypeOfSpace.Wall) return;
+            }
+        }
+
+
+        Player.Pos += direction.RotateRadians(Player.Angle) * delta;
     }
 
-    public Tuple<int, int> GetCurentTileIndex()
+    public void GetDirectionLines(Graphics g)
     {
-        return new Tuple<int, int>((int) (Math.Floor(Player.Pos.X) / TileSize),
-            (int) (Math.Floor(Player.Pos.Y) / TileSize));
-    }
-
-    public IEnumerable<Tuple<int,Rectangle>> GetDirectionLines()
-    {
-        DeltaAngle = FOV / RaysCounter;
-        ScaleX = WinWidth / RaysCounter;
-        var dist = RaysCounter / (2 * Math.Tan(FOV / 2))/4;
-        var projCoeff = 3*dist * TileSize;
-        
+        var dist = RaysCounter / (2 * Math.Tan(FOV / 2)) / 2;
+        var projCoeff = 3 * dist * TileSize;
         var currentAngle = Player.Angle - FOV / 2;
+
         for (int ray = 0; ray < RaysCounter; ray++)
         {
-            // var sinA = Math.Sin(currentAngle);
-            // var cosA = Math.Cos(currentAngle);
             var flag = true;
             for (double depth = 0; depth < MaxDepth; depth++)
             {
                 var rayVector = Player.Pos + new Vector2(0, (float) depth).RotateRadians(currentAngle);
 
-                if (Maze.Map[(int) (rayVector.X / TileSize), (int) (rayVector.Y / TileSize)].Value == TypeOfSpace.Wall)
+                if (Maze.Map[(int) (rayVector.X / TileSize), (int) (rayVector.Y / TileSize)].Value ==
+                    TypeOfSpace.Wall)
                 {
                     depth *= Math.Cos(Player.Angle - currentAngle);
                     int c = (int) (255 / (1 + depth * depth * 0.0001));
                     var projY = projCoeff / depth;
-                    yield return new Tuple<int, Rectangle>(c,
-                        new Rectangle(ray * ScaleX, (int) (WinHeight / 2 - projY/2 ), ScaleX, (int) projY));
-                    flag = false;
+                    var a = Color.FromArgb(c, c, c);
+                    g.FillRectangle(new SolidBrush(a),
+                        new Rectangle(ray * ScaleX, (int) (WindowHeight / 2 - projY / 2), ScaleX, (int) projY));
+
+
                     break;
                 }
             }
 
-            // if (flag)
-            // {
-            //     var rayVector = Player.Pos + new Vector2(0, MaxDepth).RotateRadians(currentAngle);
-            //
-            //     yield return new Point((int) rayVector.X, (int) rayVector.Y);
-            // }
-
-            currentAngle += DeltaAngle;
+            currentAngle += _deltaAngle;
         }
     }
 
-    public Tuple<Point, Point> GetDirectionLine()
+
+    (int, int) Mapping(int a, int b)
     {
-        var point1 = new Point((int) Player.Pos.X, (int) Player.Pos.Y);
-        var v = new Vector2(0, -TileSize / 4).RotateRadians(Player.Angle);
-        var point2 = new Point(point1.X + (int) v.X, (int) (point1.Y + v.Y));
-        return Tuple.Create(point1, point2);
+        return (a / TileSize * TileSize, b / TileSize * TileSize);
     }
-    public IEnumerable<Tuple<Point,Point>> lines()
+
+    public void lines(Graphics g)
     {
-        var a = new Point();
-        var b = new Point();
-        DeltaAngle = FOV / RaysCounter;
-        ScaleX = WinWidth / RaysCounter;
-        var dist = RaysCounter / (2 * Math.Tan(FOV / 2))/4;
-        var projCoeff = 3*dist * TileSize;
-        
+        var dist = RaysCounter / (2 * Math.Tan(FOV / 2)) / 2;
+        var projCoeff = 3 * dist * TileSize;
         var currentAngle = Player.Angle - FOV / 2;
+        var (xm, ym) = Mapping((int) Player.Pos.X, (int) Player.Pos.Y);
+        var ofsList = new List<int>();
         for (int ray = 0; ray < RaysCounter; ray++)
         {
-            // var sinA = Math.Sin(currentAngle);
-            // var cosA = Math.Cos(currentAngle);
-            var flag = true;
-            for (double depth = 0; depth < MaxDepth; depth++)
+            var sinA = Math.Sin(currentAngle + Math.PI / 2);
+            var cosA = Math.Cos(currentAngle + Math.PI / 2);
+            var (xh, dx) = cosA >= 0 ? (xm + TileSize, 1) : (xm, -1);
+            int yv;
+            var (verticalDepth, horizontalDepth) = (0.0, 0.0);
+            for (int i = 0; i < MaxDepth; i += TileSize)
             {
-                var rayVector = Player.Pos + new Vector2(0, (float) depth).RotateRadians(currentAngle);
-
-                if (Maze.Map[(int) (rayVector.X / TileSize), (int) (rayVector.Y / TileSize)].Value == TypeOfSpace.Wall && flag)
-                {
-                    depth *= Math.Cos(Player.Angle - currentAngle);
-                    int c = (int) (255 / (1 + depth * depth * 0.0001));
-                    var projY = projCoeff / depth;
-                    a = new Point(ray * ScaleX, (int) (WinHeight / 2 + projY / 2));
-                    flag = false;
-                    
-                }
-
-                if (Maze.Map[(int) (rayVector.X / TileSize), (int) (rayVector.Y / TileSize)].Value ==
-                    TypeOfSpace.Wall && !flag)
-                {
-                    depth *= Math.Cos(Player.Angle - currentAngle);
-                    int c = (int) (255 / (1 + depth * depth * 0.0001));
-                    var projY = projCoeff / depth;
-                    b = new Point(ray * ScaleX, (int) (WinHeight / 2 + projY / 2));
-                    flag = true;
-                    yield return Tuple.Create<Point, Point>(a,b);
-                }
+                verticalDepth = (xh - Player.Pos.X) / cosA;
+                yv = (int) (Player.Pos.Y + verticalDepth * sinA);
+                if (WallSet.Contains(Mapping(xh + dx, yv)))
+                    break;
+                xh += dx * TileSize;
+            }
+            
+            (yv, var dy) = sinA >= 0 ? (ym + TileSize, 1) : (ym, -1);
+            for (int i = 0; i < MaxDepth; i += TileSize)
+            {
+                horizontalDepth = (yv - Player.Pos.Y) / sinA;
+                xh = (int) (Player.Pos.X + horizontalDepth * cosA);
+                if (WallSet.Contains(Mapping(xh, yv + dy)))
+                    break;
+                yv += dy * TileSize;
             }
 
-            // if (flag)
-            // {
-            //     var rayVector = Player.Pos + new Vector2(0, MaxDepth).RotateRadians(currentAngle);
-            //
-            //     yield return new Point((int) rayVector.X, (int) rayVector.Y);
-            // }
+            var (depth, offset) = horizontalDepth > verticalDepth ? (verticalDepth, yv) : (horizontalDepth, xh);
+            depth *= Math.Cos(Player.Angle - currentAngle);
+            offset %= TileSize;
+            ofsList.Add(offset);
+            var projHeight = projCoeff / depth;
+            var img = ImageHandler.WallTexture;
+            var sourceRect = new Rectangle(offset * TextureScale, 0, TextureScale, TextureHeight);
+            var destinationRect = new Rectangle(ray * ScaleX, (int) ((WindowHeight - projHeight) / 2), ScaleX,
+                (int) projHeight);
+            
+            g.DrawImage(img, destinationRect, sourceRect, GraphicsUnit.Pixel);
+            
+            // int c = (int) (255 / (1 + depth * depth * 0.00002));
+            // var color = Color.FromArgb(c, c, c);
+            // // g.FillRectangle(new SolidBrush(color),
+            // //     new Rectangle(ray * ScaleX, (int) ((CFG.WindowHeight - proj_height) / 2), ScaleX, (int) proj_height));
+            
+            currentAngle += _deltaAngle;
+        }
+    }
 
-            currentAngle += DeltaAngle;
+    public void Scanlines(Graphics g)
+    {
+        var dist = RaysCounter / (2 * Math.Tan(FOV / 2)) / 2;
+        var projCoeff = 1 * dist * TileSize;
+        var currentAngle = Player.Angle - FOV / 2;
+        var (xm, ym) = Mapping((int) Player.Pos.X, (int) Player.Pos.Y);
+
+        for (int ray = 0; ray < RaysCounter; ray++)
+        {
+            var Xstack = new List<int>();
+            var Ystack = new List<int>();
+            var sinA = Math.Sin(currentAngle + Math.PI / 2);
+            var cosA = Math.Cos(currentAngle + Math.PI / 2);
+            var (hx, dx) = cosA >= 0 ? (xm + TileSize, 1) : (xm, -1);
+            int yv;
+            var (verticalDepth, horizontalDepth) = (0.0, 0.0);
+            for (int i = 0; i < MaxDepth / 2; i += TileSize)
+            {
+                verticalDepth = (hx - Player.Pos.X) / cosA;
+                yv = (int) (Player.Pos.Y + verticalDepth * sinA);
+                if (WallSet.Contains(Mapping(hx + dx, yv)))
+                    Xstack.Add((int) verticalDepth);
+                hx += dx * TileSize;
+            }
+
+            (yv, var dy) = sinA >= 0 ? (ym + TileSize, 1) : (ym, -1);
+            for (int i = 0; i < MaxDepth / 2; i += TileSize)
+            {
+                horizontalDepth = (yv - Player.Pos.Y) / sinA;
+                hx = (int) (Player.Pos.X + horizontalDepth * cosA);
+                if (WallSet.Contains(Mapping(hx, yv + dy)))
+                    Ystack.Add((int) horizontalDepth);
+                yv += dy * TileSize;
+            }
+
+            foreach (var ponts in Ystack.Zip(Xstack))
+            {
+                var a = ponts.First * Math.Cos(FOV - currentAngle);
+                var b = ponts.Second * Math.Cos(FOV - currentAngle);
+                var color = Color.Black;
+                var proj_height1 = projCoeff / a;
+                var proj_height2 = projCoeff / b;
+                // g.DrawLine(new Pen(new SolidBrush(Color.Black),2),
+                //     new Point(ray*ScaleX,(int) ((CFG.WindowHeight + proj_height1) / 2)),
+                //     new Point(ray*ScaleX,(int) ((CFG.WindowHeight + proj_height2) / 2)));
+
+                g.FillRectangle(new SolidBrush(color),
+                    new RectangleF(ray * ScaleX, (int) ((WindowHeight + proj_height1) / 2), ScaleX,
+                        (int) proj_height1 / 10));
+                g.FillRectangle(new SolidBrush(color),
+                    new RectangleF(ray * ScaleX, (int) ((WindowHeight + proj_height2) / 2), ScaleX,
+                        (int) proj_height2 / 10));
+            }
+
+            currentAngle += _deltaAngle;
         }
     }
 }

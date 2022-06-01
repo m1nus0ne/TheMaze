@@ -1,27 +1,18 @@
-using System.Drawing.Drawing2D;
 using System.Numerics;
-using Timer = System.Windows.Forms.Timer;
 
 namespace TheMaze;
 
 public partial class Form1 : Form
 {
-    private Raycasting Handler;
-    
+    public Raycasting Handler;
+
 
     public Form1()
     {
         // FormBorderStyle = FormBorderStyle.None;
         Handler = new Raycasting();
-        Handler.TileSize = 100f;
-        Handler.MaxDepth = 1000;
-        Handler.RaysCounter = 1200;
-        Handler.FOV = (float) (Math.PI/3);
-        Handler.WinWidth = 1200;
-        Handler.WinHeight = 800;
-        
-        Handler.Maze = new Field(10, 10);
-        Handler.Player = new Player(new Vector2(Handler.TileSize * 1.5f, Handler.TileSize * 1.5f), 0);
+
+
         
         InitializeComponent();
     }
@@ -31,72 +22,68 @@ public partial class Form1 : Form
         Size = new Size(1200, 800);
         DoubleBuffered = true;
         var g = e.Graphics;
-        
-        
-        g.FillRectangle(new SolidBrush(Color.Blue),0,0,Handler.WinWidth,Handler.WinHeight/2);
-        g.FillRectangle(new SolidBrush(Color.Green),0,Handler.WinHeight/2,Handler.WinWidth,Handler.WinHeight);
-        var pen = new Pen(Color.Red, 1);
 
-        // g.DrawLine(pen,Handler.GetDirectionLine().Item1,Handler.GetDirectionLine().Item2);
-       
+
+        g.FillRectangle(new SolidBrush(Color.Blue), 0, 0, CFG.WindowWidth, CFG.WindowHeight / 2);
+        g.FillRectangle(new SolidBrush(Color.Green), 0, CFG.WindowHeight / 2, CFG.WindowWidth, CFG.WindowHeight);
+        var pen = new Pen(Color.Red, 1);
+        Handler.lines(g);
+
         
-        foreach (var point in Handler.GetDirectionLines())
+
+
+        foreach (var w in Handler.WallMinimapSet)
         {
-            var a = Color.FromArgb(point.Item1, point.Item1, point.Item1);
-            
-            g.FillRectangle(new SolidBrush(a),point.Item2);
+            {
+                g.FillRectangle(new SolidBrush(Color.Black), w.Item1, w.Item2,
+                    CFG.MapTileSize, CFG.MapTileSize);
+            }
         }
-        // foreach (var point in Handler.lines())
-        // {
-        //     g.DrawLine(new Pen(Color.Black,3),point.Item1,point.Item2);
-        // }
-        // foreach (var w in Handler.Maze.WallsSet)
-        // {
-        //     g.FillRectangle(new SolidBrush(Color.Black), w.X * Handler.TileSize, w.Y * Handler.TileSize,
-        //         Handler.TileSize, Handler.TileSize);
-        // }
-        // g.FillEllipse(new SolidBrush(Color.Red),Handler.Player.Pos.X-5,Handler.Player.Pos.Y-5,10,10);
+        
+        g.FillEllipse(new SolidBrush(Color.Red), (Handler.Player.Pos.X - 5) / 5, (Handler.Player.Pos.Y - 5) / 5, 10,
+            10);
     }
 
-    
 
     protected override void OnKeyDown(KeyEventArgs e)
     {
         var v = new Vector2(0, 0);
-        if (e.KeyValue == (int)Keys.S)
+        if (e.KeyValue == (int) Keys.S)
         {
             v += new Vector2(0f, -1f);
         }
 
-        if (e.KeyValue == (int)Keys.W)
+        if (e.KeyValue == (int) Keys.W)
         {
             v += new Vector2(0f, 1f);
         }
 
-        if (e.KeyValue == (int)Keys.A)
+        if (e.KeyValue == (int) Keys.A)
         {
             v += new Vector2(1f, 0f);
         }
 
-        if (e.KeyValue == (int)Keys.D)
+        if (e.KeyValue == (int) Keys.D)
         {
             v += new Vector2(-1f, 0f);
         }
 
-        if (e.KeyValue == (int)Keys.E)
+        if (e.KeyValue == (int) Keys.E)
         {
-            Handler.TurnLeft((float) (Math.PI/8));
+            Handler.TurnLeft((float) (Math.PI / 8));
         }
 
-        if (e.KeyValue == (int)Keys.Q)
+        if (e.KeyValue == (int) Keys.Q)
         {
-            Handler.TurnRight((float) (Math.PI/8));
+            Handler.TurnRight((float) (Math.PI / 8));
         }
-        if (e.KeyValue == (int)Keys.R)
+
+        if (e.KeyValue == (int) Keys.R)
         {
             Handler.Maze = new Field(10, 10);
         }
-        Handler.Move(v,2f);
+
+        Handler.Move(v, 2f);
         Invalidate();
     }
 }

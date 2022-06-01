@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29693a07-433f-408a-b846-9045e5d8c4d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheMaze/ImageHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheMaze/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Form1.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Form1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheMaze/Maze.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Maze.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheMaze/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Raycasting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Raycasting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheMaze/TheMaze.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/TheMaze.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +33,11 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/32ca50429b143dd4887097bb82be4132c75a91b0668a93f8b139b74d4274757c/NativeWindow.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f14b2b38e41a86c6f3f927d5b5586e45cac2b8789c4c170faa6891a27ecf1d4/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TheMaze/Maze.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f857b4a4ba923116a566346f88433337e738b56c8de580dc7330b6f1fef1/Application.ComponentManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -46,7 +52,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.4709389" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="Python" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -113,7 +121,31 @@
       <workItem from="1650716512396" duration="1029000" />
       <workItem from="1651453017418" duration="2320000" />
       <workItem from="1651468770933" duration="1600000" />
-      <workItem from="1651573659080" duration="921000" />
+      <workItem from="1651573659080" duration="1172000" />
+      <workItem from="1651642529661" duration="757000" />
+      <workItem from="1651666180986" duration="676000" />
+      <workItem from="1651666891740" duration="1082000" />
+      <workItem from="1651700793819" duration="9619000" />
+      <workItem from="1651814279693" duration="155000" />
+      <workItem from="1651815039386" duration="62000" />
+      <workItem from="1651859743866" duration="1840000" />
+      <workItem from="1652387115774" duration="440000" />
+      <workItem from="1652737661053" duration="2322000" />
+      <workItem from="1652793878094" duration="7050000" />
+      <workItem from="1652876612197" duration="3351000" />
+      <workItem from="1652921408979" duration="2407000" />
+      <workItem from="1653020431348" duration="1549000" />
+      <workItem from="1653100466470" duration="3342000" />
+      <workItem from="1653133612242" duration="3413000" />
+      <workItem from="1653396390123" duration="214000" />
+      <workItem from="1653485654162" duration="175000" />
+      <workItem from="1653642212263" duration="1487000" />
+      <workItem from="1653668448928" duration="4194000" />
+      <workItem from="1653680615288" duration="431000" />
+      <workItem from="1653733511114" duration="9644000" />
+      <workItem from="1653946470337" duration="7879000" />
+      <workItem from="1654031727026" duration="2738000" />
+      <workItem from="1654090152606" duration="382000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1648661629654</created>
@@ -150,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651469298655</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="исправил лесенки на стенах">
+      <created>1651574681607</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1651574681607</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,12 +215,31 @@
     <MESSAGE value="hotfix" />
     <MESSAGE value="maze gen completed" />
     <MESSAGE value="1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.0" />
+    <MESSAGE value="исправил лесенки на стенах" />
+    <option name="LAST_COMMIT_MESSAGE" value="исправил лесенки на стенах" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/TheMaze/Raycasting.cs</url>
+          <line>137</line>
+          <properties documentPath="D:\!IT\C SHARP\TheMaze\TheMaze\TheMaze\Raycasting.cs" initialLine="137" containingFunctionPresentation="method 'lines'">
+            <startOffsets>
+              <option value="4543" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4643" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="DotNetProject">
         <watch expression="currentCell" />
+        <watch expression="offset" />
       </configuration>
     </watches-manager>
   </component>

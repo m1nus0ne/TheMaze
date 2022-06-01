@@ -1,7 +1,4 @@
-﻿using System.Text;
-using System.Linq;
-
-namespace TheMaze;
+﻿namespace TheMaze;
 
 public class Cell
 {
@@ -18,7 +15,6 @@ public class Cell
         Value = value;
         IsVisited = false;
         Hash = GetHashCode();
-        
     }
 
 
@@ -38,17 +34,16 @@ public class Field
     private int _rows;
     private int _cols;
     public Cell[,] Map;
-    public HashSet<Cell> WallsSet;
-    public int FreeCellsCounter;
+    private int _freeCellsCounter;
 
 
     public Field(int rows, int cols)
     {
-        FreeCellsCounter = cols * rows-1;
+        _freeCellsCounter = cols * rows - 1;
         _rows = rows * 2 + 1;
         _cols = cols * 2 + 1;
         Map = new Cell[_cols, _rows];
-        WallsSet = new HashSet<Cell>();
+
         GenerateMaze();
     }
 
@@ -67,14 +62,6 @@ public class Field
         return null;
     }
 
-    public void GetWallSet()
-    {
-        WallsSet = new HashSet<Cell>();
-        foreach (var cell in Map)
-        {
-            if (cell.Value == TypeOfSpace.Wall) WallsSet.Add(cell);
-        }
-    }
 
     public bool CheckCell(int x, int y)
     {
@@ -109,19 +96,16 @@ public class Field
         }
 
 
-
         var wayStack = new Stack<Cell>();
         var currentCell = Map[1, 1];
-        while (FreeCellsCounter!=0)
+        while (_freeCellsCounter != 0)
         {
-            Backtrack(ref currentCell,ref wayStack);
+            Backtrack(ref currentCell, ref wayStack);
         }
-        
     }
 
     public void Backtrack(ref Cell currentCell, ref Stack<Cell> wayStack)
     {
-        
         // recursive backtrack
         currentCell.IsVisited = true;
         var nextCell = GetNeighbours(currentCell);
@@ -132,11 +116,8 @@ public class Field
             var breackedWall = Map[(currentCell.X + nextCell.X) / 2, (currentCell.Y + nextCell.Y) / 2];
             breackedWall.Value = TypeOfSpace.Empty;
             currentCell = nextCell;
-            FreeCellsCounter--;
+            _freeCellsCounter--;
         }
         else if (wayStack.Count != 0) currentCell = wayStack.Pop();
-
-        if (FreeCellsCounter == 0) GetWallSet();
-
     }
 }
