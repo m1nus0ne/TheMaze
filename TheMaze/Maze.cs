@@ -35,7 +35,8 @@ public class Field
     private int _cols;
     public Cell[,] Map;
     private int _freeCellsCounter;
-
+    public (int, int) EndPos;
+    public (int, int) StartPos;
 
     public Field(int rows, int cols)
     {
@@ -102,6 +103,9 @@ public class Field
         {
             Backtrack(ref currentCell, ref wayStack);
         }
+
+        StartPos = ((int) (1.5 * CFG.TileSize), (int) (1.5 * CFG.TileSize));
+        EndPos = ((_rows - 2) * CFG.TileSize, (_cols - 2) * CFG.TileSize);
     }
 
     public void Backtrack(ref Cell currentCell, ref Stack<Cell> wayStack)

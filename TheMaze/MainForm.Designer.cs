@@ -2,7 +2,7 @@
 
 namespace TheMaze;
 
-partial class Form1
+partial class MainForm
 {
     /// <summary>
     ///  Required designer variable.
@@ -33,7 +33,7 @@ partial class Form1
         this.components = new System.ComponentModel.Container();
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(CFG.WindowWidth, CFG.WindowHeight);
-        this.Text = "Form1";
+        this.Text = "MainForm";
     }
 
     #endregion

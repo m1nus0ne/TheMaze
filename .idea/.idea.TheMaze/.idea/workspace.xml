@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29693a07-433f-408a-b846-9045e5d8c4d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TheMaze/ImageHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheMaze/CFG.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheMaze/ContorStateMachine.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheMaze/Drawer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheMaze/EventsHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheMaze/MainForm.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheMaze/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheMaze/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Form1.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheMaze/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Form1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheMaze/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/MainForm.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheMaze/Form1.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Maze.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Maze.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheMaze/Raycasting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/Raycasting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheMaze/TheMaze.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TheMaze/TheMaze.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,10 +36,25 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/32ca50429b143dd4887097bb82be4132c75a91b0668a93f8b139b74d4274757c/NativeWindow.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f14b2b38e41a86c6f3f927d5b5586e45cac2b8789c4c170faa6891a27ecf1d4/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/59158d2286f882e5982e1fbc586af7076fc1aefc88cf99e80cd3f9099f20f1/ScrollableControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/adeac7e0d66070992306aba327dd9e7b487a39044c45f37cf77e9704ff721c8/Control.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TheMaze/Maze.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f857b4a4ba923116a566346f88433337e738b56c8de580dc7330b6f1fef1/Application.ComponentManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8e193d43c83e6fe994ebe6e61db21454e1e3b830bdf0acc3f60ec88d43/Application.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b05a982755f94041856198883df975ef7b46c6ab3fc21b37965e6d62aa28a/WeakReference.T.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5ad5cec63fad74ea44dcbe8852cc3083e6bf4a1860a8a3a0b4644b5470b79e/BitVector32.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8b0de89f26e7f37c7aef205522356e362474423270481ef249037e167e1bb/Graphics.Windows.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/853b21c8c3b6d5bf2548a0e82c8719e536d3a6c41d58edfaca2635f746af3a5/Timer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e785536dea11183e0f17efc59d991ebe094ede9/ApplicationConfiguration.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f14b2b38e41a86c6f3f927d5b5586e45cac2b8789c4c170faa6891a27ecf1d4/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f857b4a4ba923116a566346f88433337e738b56c8de580dc7330b6f1fef1/Application.ComponentManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5c50f845fc6cb7edc34b6018f8b2e5a64396fd45dd2a26e99698eca6fcdb60ea/ContainerControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1f9f4df1c25bbabd5d1e997df5eca749dcdcc7331e7c45eadda749f604bd6/Form.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6b459ab4c8d9f7fb58928f181546655e83988835c67767c083d42fceaa46a41/Rectangle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ab1541f9a3d9763c2ff681ccc8fe3195f4ee63e97563178d77296dd6d859f/SizeF.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/542ef433efe6a2d5c3f5193b77f76be208cb46630fe509d71265667a555a794/Graphics.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -145,7 +162,13 @@
       <workItem from="1653733511114" duration="9644000" />
       <workItem from="1653946470337" duration="7879000" />
       <workItem from="1654031727026" duration="2738000" />
-      <workItem from="1654090152606" duration="382000" />
+      <workItem from="1654090152606" duration="3681000" />
+      <workItem from="1654182757723" duration="684000" />
+      <workItem from="1654223550211" duration="122000" />
+      <workItem from="1654284663069" duration="2177000" />
+      <workItem from="1654287901255" duration="467000" />
+      <workItem from="1654295755779" duration="5311000" />
+      <workItem from="1654303107679" duration="19297000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1648661629654</created>
@@ -189,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651574681607</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="текстуры">
+      <created>1654090613964</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1654090613964</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,30 +246,15 @@
     <MESSAGE value="maze gen completed" />
     <MESSAGE value="1.0" />
     <MESSAGE value="исправил лесенки на стенах" />
-    <option name="LAST_COMMIT_MESSAGE" value="исправил лесенки на стенах" />
+    <MESSAGE value="текстуры" />
+    <option name="LAST_COMMIT_MESSAGE" value="текстуры" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/TheMaze/Raycasting.cs</url>
-          <line>137</line>
-          <properties documentPath="D:\!IT\C SHARP\TheMaze\TheMaze\TheMaze\Raycasting.cs" initialLine="137" containingFunctionPresentation="method 'lines'">
-            <startOffsets>
-              <option value="4543" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4643" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="DotNetProject">
         <watch expression="currentCell" />
         <watch expression="offset" />
+        <watch expression="yv" language="C#" />
       </configuration>
     </watches-manager>
   </component>
